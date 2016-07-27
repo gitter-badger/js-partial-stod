@@ -2,6 +2,8 @@
 
 [![Recent Version][npm-badge]][npm-url]
 [![Travis CI - Build Status][travis-badge]][travis-url]
+[![Codacy Badge][codacy-badge]][codacy-url]
+[![Code Climate Badge][codecl-badge]][codecl-url]
 [![Coveralls - Code Coverage Status][cov-badge]][cov-url]
 [![David - Dependencies][dep-badge]][dep-url]
 [![David - DevDependencies][dev-dep-badge]][dev-dep-url]
@@ -35,6 +37,12 @@ npm install js-partial-stod
 
 [cov-badge]:     https://coveralls.io/repos/github/jsostd/js-partial-stod/badge.svg?branch=master
 [cov-url]:       https://coveralls.io/github/jsostd/js-partial-stod
+
+[codacy-badge]:  https://api.codacy.com/project/badge/Grade/01625f562f3e4765bcc84c7fa13c9602
+[codacy-url]:    https://www.codacy.com/app/richrdkng/js-partial-stod?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jsostd/js-partial-stod&amp;utm_campaign=Badge_Grade
+
+[codecl-badge]:  https://codeclimate.com/github/jsostd/js-partial-stod/badges/gpa.svg
+[codecl-url]:    https://codeclimate.com/github/jsostd/js-partial-stod
 
 [dep-badge]:     https://david-dm.org/jsostd/js-partial-stod.svg
 [dep-url]:       https://david-dm.org/jsostd/js-partial-stod
