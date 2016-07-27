@@ -1,7 +1,7 @@
 {
   "name": "js-partial-stod",
   "version": "0.0.0",
-  "description": "String to duration partial.",
+  "description": "A partial to return the duration as a number (string to duration).",
   "main": "dist/js-partial-stod.js",
   "license": "MIT",
   "homepage": "https://github.com/jsostd/js-partial-stod",
