@@ -82,13 +82,13 @@
                              ? options.returnUnitAs
                              : returnUnitAs;
 
-            roundMilliseconds = options.roundMilliseconds
+            roundMilliseconds = typeof options.roundMilliseconds === 'boolean'
                                     ? options.roundMilliseconds
                                     : roundMilliseconds;
 
-            roundReturnUnit   = options.roundReturnUnit
-                                    ? options.roundReturnUnit
-                                    : roundReturnUnit;
+            roundReturnUnit = typeof options.roundReturnUnit === 'boolean'
+                                  ? options.roundReturnUnit
+                                  : roundReturnUnit;
         }
 
         // type, and sanity guards
@@ -105,49 +105,43 @@
         while ((matches = pattern.exec(string)) !== null) {
             var value = parseFloat(matches[1]);
             var unit  = matches[2];
-            var ms    = 0;
 
-            // NaN guard
-            if (value === value) {
-                switch (unit) {
-                    case 'd':
-                    case 'day':
-                    case 'days':
-                        ms = value * 86400000;
-                        break;
+            switch (unit) {
+                case 'd':
+                case 'day':
+                case 'days':
+                    duration += value * 86400000;
+                    break;
 
-                    case 'h':
-                    case 'hour':
-                    case 'hours':
-                        ms = value * 3600000;
-                        break;
+                case 'h':
+                case 'hour':
+                case 'hours':
+                    duration += value * 3600000;
+                    break;
 
-                    case 'm':
-                    case 'min':
-                    case 'minute':
-                    case 'minutes':
-                        ms = value * 60000;
-                        break;
+                case 'm':
+                case 'min':
+                case 'minute':
+                case 'minutes':
+                    duration += value * 60000;
+                    break;
 
-                    case 's':
-                    case 'sec':
-                    case 'second':
-                    case 'seconds':
-                        ms = value * 1000;
-                        break;
+                case 's':
+                case 'sec':
+                case 'second':
+                case 'seconds':
+                    duration += value * 1000;
+                    break;
 
-                    case 'ms':
-                    case 'millisecond':
-                    case 'milliseconds':
-                        ms = value;
-                        break;
-                }
+                case 'ms':
+                case 'millisecond':
+                case 'milliseconds':
+                    duration += value;
+                    break;
             }
-
-            duration += ms;
         }
 
-        // if duration has any meaningful value, than 0, only then run through additional options
+        // if duration has any meaningful value than 0, only then run through additional options
         if (duration > 0) {
 
             if (roundMilliseconds) {
