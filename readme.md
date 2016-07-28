@@ -1,5 +1,7 @@
 # js-partial-stod
 
+[![Join the chat at https://gitter.im/jsopenstd/js-partial-stod](https://badges.gitter.im/jsopenstd/js-partial-stod.svg)](https://gitter.im/jsopenstd/js-partial-stod?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Recent Version][npm-badge]][npm-url]
 [![Travis CI - Build Status][travis-badge]][travis-url]
 [![Coveralls - Code Coverage Status][cov-badge]][cov-url]
