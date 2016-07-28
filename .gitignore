@@ -1,3 +1,6 @@
+# IntelliJ project directory
+.idea/
+
 # Vagrant VM directory
 .vagrant/
 
