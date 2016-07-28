@@ -172,15 +172,14 @@ def git_publish():
     version = get_data(data, 'version')
 
     # stage files
-    exec_command(["git add", "--all"], shell=True)
+    exec_command(["git add --all"], shell=True)
 
     # commit
-    message = "-m \"v{}\"".format(version)
-    exec_command(["git commit", message], shell=True)
+    exec_command(["git commit -m \"v{}\"".format(version)], shell=True)
 
     # tag
     tag = "v{}".format(version)
-    exec_command(["git tag", tag], shell=True)
+    #exec_command(["git tag", tag], shell=True)
 
     # push
     #exec_command(["git push", "--tags"], shell=True)
@@ -235,10 +234,10 @@ if len(args) > 0:
             npm_set_prerequisites(npm_adduser_sh, data)
 
         # bump file versions according to sub_task
-        bump_files(sub_task)
+        #bump_files(sub_task)
 
         # build files
-        exec_command(gulp.format("tasks/build"))
+        #exec_command(gulp.format("tasks/build"))
 
         # commit and push files
         git_publish()

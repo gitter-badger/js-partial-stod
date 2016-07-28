@@ -2,7 +2,7 @@
  * @overview A partial to return the duration as a number (string to duration).
  *
  * @module js/partial/stod
- * @version 0.0.0
+ * @version 0.0.1
  *
  * @author Richard King <richrdkng@gmail.com> [GitHub]{@link https://github.com/richrdkng}
  * @license MIT
