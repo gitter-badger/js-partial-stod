@@ -178,11 +178,10 @@ def git_publish():
     exec_command(["git commit -m \"v{}\"".format(version)], shell=True)
 
     # tag
-    tag = "v{}".format(version)
-    #exec_command(["git tag", tag], shell=True)
+    exec_command(["git tag v{}".format(version)], shell=True)
 
     # push
-    #exec_command(["git push", "--tags"], shell=True)
+    exec_command(["git push origin master --tags"], shell=True)
 
 
 def npm_publish():
@@ -234,18 +233,16 @@ if len(args) > 0:
             npm_set_prerequisites(npm_adduser_sh, data)
 
         # bump file versions according to sub_task
-        #bump_files(sub_task)
+        bump_files(sub_task)
 
         # build files
-        #exec_command(gulp.format("tasks/build"))
+        exec_command(gulp.format("tasks/build"))
 
         # commit and push files
         git_publish()
 
-        # TODO: uncomment below
-        # npm_publish()
-
-        # TODO: python and .js files too (gulp)
+        # publish on NPM
+        npm_publish()
 
     else:
         exec_command(gulp.format(main_task))
