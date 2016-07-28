@@ -10,4 +10,5 @@
 # Logs
 /npm-debug.log
 
-
+# Required data for publishing project
+/.publish.json

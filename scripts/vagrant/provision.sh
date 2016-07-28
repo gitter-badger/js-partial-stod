@@ -19,7 +19,7 @@ sudo apt-get update -y
 
 "$_SCRIPTS_DIR/install_git.sh"
 
-"$_SCRIPTS_DIR/install_php.sh"
+"$_SCRIPTS_DIR/install_python.sh"
 
 "$_SCRIPTS_DIR/install_node.sh"
 

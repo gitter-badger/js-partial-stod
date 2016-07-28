@@ -1,6 +1,6 @@
 
 # add alias for running general tasks
-alias run="php /vagrant/scripts/tasks/main.php"
+alias run="/vagrant/scripts/tasks/main.py"
 
 # navigate to vagrant folder upon login
 cd /vagrant
