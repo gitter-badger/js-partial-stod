@@ -13,7 +13,7 @@
  * For more information and license, check the link below:
  * [UMD GitHub Repository]{@link https://github.com/umdjs/umd}
  */
-(function (root, factory) {
+(function(root, factory) {
     // AMD
     /* istanbul ignore next: ignore coverage test for UMD */
     if (typeof define === 'function' && define.amd) {
@@ -27,7 +27,7 @@
     } else {
         root.js_partial_stod = factory();
     }
-}(this, function () {
+}(this, function() {
     'use strict';
 
     /**
@@ -68,69 +68,79 @@
      */
     return function stod(string, options) {
 
-        // options - default values
-        var returnUnitAs      = 'ms',
-            roundMilliseconds = true,
-            roundReturnUnit   = false;
+            // constants
+        var DAYS_IN_MS    = 86400000,
+            HOURS_IN_MS   = 3600000,
+            MINUTES_IN_MS = 60000,
+            SECONDS_IN_MS = 1000,
 
-        var pattern  = /([\d.]+)\s*(\w+)/g,
+            // options - default values
+            returnUnitAs      = 'ms',
+            roundMilliseconds = true,
+            roundReturnUnit   = false,
+
+            // general variables
+            pattern  = /([\d.]+)\s*(\w+)/g,
             duration = 0,
-            matches;
+            matches,
+            value,
+            unit,
+            returnUnitDivider;
 
         if (options) {
-            returnUnitAs = options.returnUnitAs
-                             ? options.returnUnitAs
-                             : returnUnitAs;
+            if (options.returnUnitAs) {
+                returnUnitAs = options.returnUnitAs;
+            }
 
-            roundMilliseconds = typeof options.roundMilliseconds === 'boolean'
-                                    ? options.roundMilliseconds
-                                    : roundMilliseconds;
+            if (typeof options.roundMilliseconds === 'boolean') {
+                roundMilliseconds = options.roundMilliseconds;
+            }
 
-            roundReturnUnit = typeof options.roundReturnUnit === 'boolean'
-                                  ? options.roundReturnUnit
-                                  : roundReturnUnit;
+            if (typeof options.roundReturnUnit === 'boolean') {
+                roundReturnUnit = options.roundReturnUnit;
+            }
         }
 
-        // type, and sanity guards
-            // type guard
-            if (typeof string !== 'string') {
-                return duration;
-            }
+        // type guard
+        if (typeof string !== 'string') {
+            return duration;
+        }
 
-            // type and length guard
-            if (typeof string === 'string' && string.length === 0) {
-                return duration;
-            }
+        // type and length guard
+        if (typeof string === 'string' && string.length === 0) {
+            return duration;
+        }
 
+        // split up input by pattern
         while ((matches = pattern.exec(string)) !== null) {
-            var value = parseFloat(matches[1]);
-            var unit  = matches[2];
+            value = parseFloat(matches[1]);
+            unit  = matches[2];
 
             switch (unit) {
                 case 'd':
                 case 'day':
                 case 'days':
-                    duration += value * 86400000;
+                    duration += value * DAYS_IN_MS;
                     break;
 
                 case 'h':
                 case 'hour':
                 case 'hours':
-                    duration += value * 3600000;
+                    duration += value * HOURS_IN_MS;
                     break;
 
                 case 'm':
                 case 'min':
                 case 'minute':
                 case 'minutes':
-                    duration += value * 60000;
+                    duration += value * MINUTES_IN_MS;
                     break;
 
                 case 's':
                 case 'sec':
                 case 'second':
                 case 'seconds':
-                    duration += value * 1000;
+                    duration += value * SECONDS_IN_MS;
                     break;
 
                 case 'ms':
@@ -138,6 +148,8 @@
                 case 'milliseconds':
                     duration += value;
                     break;
+
+                // skip default case - not needed
             }
         }
 
@@ -151,34 +163,36 @@
 
             // if the returnUnit is in different unit, than the default 'ms' (milliseconds)
             if (returnUnitAs !== 'ms') {
-                var returnUnitDivider = 1;
+                returnUnitDivider = 1;
 
                 switch (returnUnitAs) {
                     case 'd':
                     case 'day':
                     case 'days':
-                        returnUnitDivider = 86400000;
+                        returnUnitDivider = DAYS_IN_MS;
                         break;
 
                     case 'h':
                     case 'hour':
                     case 'hours':
-                        returnUnitDivider = 3600000;
+                        returnUnitDivider = HOURS_IN_MS;
                         break;
 
                     case 'm':
                     case 'min':
                     case 'minute':
                     case 'minutes':
-                        returnUnitDivider = 60000;
+                        returnUnitDivider = MINUTES_IN_MS;
                         break;
 
                     case 's':
                     case 'sec':
                     case 'second':
                     case 'seconds':
-                        returnUnitDivider = 1000;
+                        returnUnitDivider = SECONDS_IN_MS;
                         break;
+
+                    // skip default case - not needed
                 }
 
                 duration /= returnUnitDivider;

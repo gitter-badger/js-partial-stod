@@ -2,6 +2,7 @@ const gulp     = require('gulp'),
       mocha    = require('gulp-mocha'),
       coverage = require('gulp-istanbul'),
       sequence = require("gulp-sequence"),
+      lint     = require('gulp-eslint'),
       debug    = require('gulp-debug'),
       vars     = require('../../../../tests/variables');
 
@@ -111,12 +112,24 @@ gulp.task(
 );
 
 gulp.task(
+    'tasks/test-src-with-lint',
+    function() {
+        return gulp
+            .src('../../src/js-partial-stod.js')
+            .pipe(lint())
+            .pipe(lint.format())
+            .pipe(lint.failAfterError());
+    }
+);
+
+gulp.task(
     'tasks/test',
     function(cb) {
         sequence(
             'tasks/test-dist-dev',
             'tasks/test-dist-prod',
-            'tasks/test-src-with-coverage'
+            'tasks/test-src-with-coverage',
+            'tasks/test-src-with-lint'
         )(cb);
     }
 );
