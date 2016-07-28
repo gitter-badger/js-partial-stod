@@ -161,7 +161,7 @@ def bump_files(bump_type):
         bump = bump.format(bump_type)
 
     else:
-        # patch is the default bump_type
+        # "patch" is the default bump_type
         bump = bump.format("patch")
 
     exec_command(gulp.format(bump))
@@ -171,20 +171,16 @@ def git_publish():
     data = get_json_data(package_json)
     version = get_data(data, 'version')
 
-    print(version)
-
     # stage files
-    #exec_command(["git add", "--all"], shell=True)
+    exec_command(["git add", "--all"], shell=True)
 
     # commit
     message = "-m \"v{}\"".format(version)
-
-    #exec_command(["git commit", message], shell=True)
+    exec_command(["git commit", message], shell=True)
 
     # tag
     tag = "v{}".format(version)
-
-    #exec_command(["git tag", tag], shell=True)
+    exec_command(["git tag", tag], shell=True)
 
     # push
     #exec_command(["git push", "--tags"], shell=True)
@@ -233,22 +229,16 @@ if len(args) > 0:
 
         # check prerequisites
         if not git_prerequisites_exist():
-            # TODO: uncomment below
-            # git_set_prerequisites(data)
-            pass
+            git_set_prerequisites(data)
 
         if not npm_prerequisites_exist():
-            # TODO: uncomment below
-            # npm_set_prerequisites(npm_adduser_sh, data)
-            pass
+            npm_set_prerequisites(npm_adduser_sh, data)
 
         # bump file versions according to sub_task
-        # TODO: uncomment below
-        # bump_files(sub_task)
+        bump_files(sub_task)
 
         # build files
-        # TODO: uncomment below
-        # exec_command(gulp.format("tasks/build"))
+        exec_command(gulp.format("tasks/build"))
 
         # commit and push files
         git_publish()

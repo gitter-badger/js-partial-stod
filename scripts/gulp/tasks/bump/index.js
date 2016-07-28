@@ -70,17 +70,12 @@ gulp.task(
 
         package_json.version = getNextVersion();
 
-        // TODO: uncomment below
-        /*
-        fs.writeFileSync(
-            path,
-            JSON.stringify(
-                package_json,
-                null,
-                2
-            )
-        );
-        */
+        var data = JSON.stringify(package_json, null, 2);
+
+        // add new line to the end of the file by adding to the data
+        data += '\n';
+
+        fs.writeFileSync(path, data);
 
         cb();
     }
@@ -103,8 +98,7 @@ gulp.task(
         var pattern = /\* @version [\d.]+/;
         src = src.replace(pattern, '* @version ' + version);
 
-        // TODO: uncomment below
-        // fs.writeFileSync(path, src);
+        fs.writeFileSync(path, src);
 
         cb();
     }
